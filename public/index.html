@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+
+<title>Scraper</title>
+<style>
+  nav ul{height:400px;}
+  nav ul{overflow:hidden; overflow-y:scroll;}
+  
+</style>
+</head>
+<body>
+  <!--Main Container-->
+  <div class="container">
+  <div>
+    <h1>Web Scraper</h1>
+  </div>  
+  <!-- Links -->
+  <div>
+      <a href="/scrape">Scrape</a>
+      <a href="/clear">Clear</a>
+  </div>  
+  <!-- Articles-->
+  <div class="row p-2">
+  <nav class="list-group">  
+    <ul id="articles">
+      
+    </ul>
+  </nav>
+  <!--Comments-->
+  <div>&nbsp;&nbsp;</div>
+  <div style="width:40%;">
+    <h4 id="title">Article Title</h4>
+    <div id="comments" style="background-color: aqua"></div>
+    <form class="form-group" action="/save" method="POST">
+      <input type="hidden" id="article_id" name="article_id">
+      <textarea class="form-control" rows="5" id="userComment" name="userComment" placeholder="Enter Comment..."></textarea>
+      <input type="text" class="form-control" placeholder="By:" id="by" name="by">
+      <input type="submit" class="form-control btn-info">
+    </form>
+  </div>
+  </div>
+
+</div><!--End of Main-->
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+<script src="./handler.js"></script>
+</body>
+</html>
