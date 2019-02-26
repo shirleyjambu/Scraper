@@ -19,9 +19,6 @@
   </div>  
   <!-- Links -->
   <div>
-      
-      
-
       <a href="/scrape"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Scrape and Save">
           Scrape
         </button></a>
@@ -31,29 +28,31 @@
   </div>  
   <!-- Articles-->
   <div class="row p-2">
-  
-    <ul id="articles" class="nav flex-column list-group">
-      
-    </ul>
-  
-  <!--Comments-->
-  <div>&nbsp;&nbsp;</div>
-  <div style="width:40%;">
-    <h4 id="title">Article Title</h4>
-    <div >
-      <ul id="comments">
-
+    <div class="col-5">
+      <ul id="articles" class="nav flex-column list-group">
+      There are no articles. Please click Scrape.    
       </ul>
     </div>
-    <form class="form-group" action="/comment" method="POST">
-      <input type="hidden" id="article_id" name="article_id">
-      <textarea class="form-control" rows="5" id="userComment" name="userComment" placeholder="Enter Comment..."></textarea>
-      <input type="text" class="form-control" placeholder="By:" id="by" name="by">
-      <input type="submit" class="form-control btn-info">
-    </form>
-  </div>
-  </div>
+  <!--Comments-->
+    <div class="col-1">&nbsp;&nbsp;</div>
+    <div class="col-6" id="commentDiv">
+      <h4 id="title">Article Title</h4>
+      <div >
+        <ul id="comments">
 
+        </ul>
+      </div>
+
+      <form id="commentForm" class="form-group" action="/comment" method="POST">
+        <input type="hidden" id="article_id" name="article_id">
+        <textarea class="form-control" rows="5" id="userComment" name="userComment" placeholder="Enter Comment..."></textarea>
+        <input type="text" class="form-control" placeholder="By:" id="by" name="by">
+        <input type="submit" class="form-control btn-info">
+      </form>
+      <p><h6>Please click on the article to enter comments.</h6></p>
+
+    </div>
+  </div>
 </div><!--End of Main-->
   
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

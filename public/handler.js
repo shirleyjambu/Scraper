@@ -3,6 +3,14 @@ const displayArticles = () =>{
     method : 'GET',
     url : '/all'
   }).then((dbArticles) =>{
+    if(dbArticles.length > 0){
+      $("#articles").empty();
+      $("#commentDiv").show();
+      $("#commentForm :input").prop("disabled", true);
+    }else{
+      $("#commentDiv").hide();
+    }
+    
     dbArticles.forEach(article => {
       $('<li>')
       .addClass('list-group-item article')
@@ -46,6 +54,8 @@ const deleteComment = (id) =>{
 
 
 const loadArticle = (id, title) =>{  
+  $("#commentDiv").show();
+  $("#commentForm :input").prop("disabled", false);
   getComments(id);
   $("#title").text(title);
   $("#article_id").val(id);
