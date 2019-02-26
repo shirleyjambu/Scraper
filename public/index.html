@@ -7,12 +7,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
+<link rel="stylesheet" href="./style.css">
 <title>Scraper</title>
-<style>
-  nav ul{height:400px;}
-  nav ul{overflow:hidden; overflow-y:scroll;}
-  
-</style>
+
 </head>
 <body>
   <!--Main Container-->
@@ -22,22 +19,33 @@
   </div>  
   <!-- Links -->
   <div>
-      <a href="/scrape">Scrape</a>
-      <a href="/clear">Clear</a>
+      
+      
+
+      <a href="/scrape"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Scrape and Save">
+          Scrape
+        </button></a>
+      <a href="/clear"><button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Clear all data">
+          Clear
+        </button></a>
   </div>  
   <!-- Articles-->
   <div class="row p-2">
-  <nav class="list-group">  
-    <ul id="articles">
+  
+    <ul id="articles" class="nav flex-column list-group">
       
     </ul>
-  </nav>
+  
   <!--Comments-->
   <div>&nbsp;&nbsp;</div>
   <div style="width:40%;">
     <h4 id="title">Article Title</h4>
-    <div id="comments" style="background-color: aqua"></div>
-    <form class="form-group" action="/save" method="POST">
+    <div >
+      <ul id="comments">
+
+      </ul>
+    </div>
+    <form class="form-group" action="/comment" method="POST">
       <input type="hidden" id="article_id" name="article_id">
       <textarea class="form-control" rows="5" id="userComment" name="userComment" placeholder="Enter Comment..."></textarea>
       <input type="text" class="form-control" placeholder="By:" id="by" name="by">

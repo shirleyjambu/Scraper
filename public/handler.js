@@ -1,5 +1,4 @@
 const displayArticles = () =>{
-  $("#spinner").show();
   $.ajax({
     method : 'GET',
     url : '/all'
@@ -14,28 +13,39 @@ const displayArticles = () =>{
   });
 }
 
+const displayComment = (comment) =>{
+  console.log(comment.comment);
+  $("#comments").append(`<li comment-id='${comment._id}'> ${comment.comment}  - By :  ${comment.by} <i class='fa fa-times deleteC'></i></li>`);
+}
+
 const getComments = (id) =>{
+  $("#comments").empty();
   $.ajax({
     url : '/getArticle/'+id,
     method : 'GET'
   }).then((dbComments)=>{
-    console.log('Got Article');
-    console.log(dbComments[0]);
-    console.log(dbComments[0].link);
-
     let commentArr = dbComments[0].comments;
-    console.log(commentArr.length);
-  
     commentArr.forEach(comment =>{
-      console.log(comment.comment);
-      $("#comments").append(comment.comment + " - By :" + comment.by);
+      displayComment(comment);    
     });
-
-  //   return commentArr;
   });
 };
 
-const loadComments = (id, title) =>{  
+
+const deleteComment = (id) =>{
+  let article_id = $("article_id").val();
+  $.ajax({
+    url : '/comment/'+id,
+    method : 'DELETE'
+  }).then((dbComments)=>{
+    console.log('Deleted ');
+    //loadArticle(article_id, 'title');
+    getComments(article_id);
+  });
+};
+
+
+const loadArticle = (id, title) =>{  
   getComments(id);
   $("#title").text(title);
   $("#article_id").val(id);
@@ -49,9 +59,17 @@ $(document).ready(function() {
   //On click of every list item
   $(document).on("click",".article",function(){
     let id = $(this).attr('data_id');
-    let title = $(this).text()
+    let title = $(this).text();
+    //$(this).attr("style","1px solid red");
     $("#comments").empty();
-    loadComments(id , title);
+    loadArticle(id , title);
+  });
+
+  //OnDelete of every Comment
+  $(document).on("click",".deleteC",function(){
+    let idC = $(this).closest("li").attr("comment-id");
+    console.log("comment id : " + idC);
+    deleteComment(idC);
   });
 
 });  

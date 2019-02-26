@@ -88,9 +88,10 @@ router.use("/clear", function(req, res){
 
 
 //Saves the comment
-router.use("/save", function(req, res){
+router.route("/comment/:id?")
+.post(function(req, res){
+  
   let commentData = {comment: req.body.userComment, by : req.body.by};
-  console.log(commentData);
   db.Comment.create(commentData)
     .then(function (dbComment) {
       return db.Article.findByIdAndUpdate({ _id: req.body.article_id }, {$push:{comments: dbComment._id}}, { new: true })
@@ -104,6 +105,23 @@ router.use("/save", function(req, res){
         res.json(err);
       });
     });
+})
+.delete(function(req,res){
+  let id = req.params.id;
+  console.log('To Delete comment : ' + id);
+  db.Comment.deleteOne({_id:id})
+    .then(function (dbComment){
+    return db.Article.findByIdAndUpdate({ _id: req.body.article_id }, {$pull:{comments: dbComment._id}})
+      .then((dbArticle) => {
+        console.log('Deleted Comment');
+        //res.sendFile(path.join(__dirname + './../public/index.html'));
+        res.json(dbArticle);
+      })
+      .catch(err => {
+        console.log("Error Deleting Comment." + err)
+        res.json(err);
+      });
+    })
 });
 
 module.exports = router;
