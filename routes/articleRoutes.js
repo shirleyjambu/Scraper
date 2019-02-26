@@ -90,14 +90,18 @@ router.use("/clear", function(req, res){
 //Saves the comment
 router.route("/comment/:id?")
 .post(function(req, res){
+  console.log("In add");
+  let commentData = {comment: req.body.comment, by : req.body.by};
+  console.log('commentData');
+  console.log(commentData);
   
-  let commentData = {comment: req.body.userComment, by : req.body.by};
   db.Comment.create(commentData)
     .then(function (dbComment) {
       return db.Article.findByIdAndUpdate({ _id: req.body.article_id }, {$push:{comments: dbComment._id}}, { new: true })
       .then((dbArticle) => {
         console.log('Saved Comment');
-        res.sendFile(path.join(__dirname + './../public/index.html'));
+        //res.sendFile(path.join(__dirname + './../public/index.html'));
+        res.json(dbArticle);
       
       })
       .catch(err => {

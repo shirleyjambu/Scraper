@@ -38,16 +38,16 @@
     <div class="col-6" id="commentDiv">
       <h4 id="title">Article Title</h4>
       <div >
-        <ul id="comments">
+        <ol id="comments">
 
-        </ul>
+        </ol>
       </div>
 
-      <form id="commentForm" class="form-group" action="/comment" method="POST">
+      <form id="commentForm" class="form-group">
         <input type="hidden" id="article_id" name="article_id">
         <textarea class="form-control" rows="5" id="userComment" name="userComment" placeholder="Enter Comment..."></textarea>
         <input type="text" class="form-control" placeholder="By:" id="by" name="by">
-        <input type="submit" class="form-control btn-info">
+        <button id="saveComment" class="form-control btn-info">Submit</button>
       </form>
       <p><h6>Please click on the article to enter comments.</h6></p>
 

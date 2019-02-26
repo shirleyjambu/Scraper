@@ -23,7 +23,15 @@ const displayArticles = () =>{
 
 const displayComment = (comment) =>{
   console.log(comment.comment);
-  $("#comments").append(`<li comment-id='${comment._id}'> ${comment.comment}  - By :  ${comment.by} <i class='fa fa-times deleteC'></i></li>`);
+  $("#comments").append(`<li comment-id='${comment._id}'>
+   <div class='row py-2'>
+    <div class='col-6'>
+      ${comment.comment}  - By :  ${comment.by} 
+    </div>
+    <div class='col-6'>  
+      <button class='btn btn-info'><i class='fa fa-times deleteC'></i></button>
+   </div>
+   </li>`);
 }
 
 const getComments = (id) =>{
@@ -47,7 +55,6 @@ const deleteComment = (id) =>{
     method : 'DELETE'
   }).then((dbComments)=>{
     console.log('Deleted ');
-    //loadArticle(article_id, 'title');
     getComments(article_id);
   });
 };
@@ -81,5 +88,27 @@ $(document).ready(function() {
     console.log("comment id : " + idC);
     deleteComment(idC);
   });
+
+  $(document).on("click","#saveComment",function(event){
+    
+    event.preventDefault();
+
+    let articleId = $("#article_id").val();
+
+    let commentData = {
+      comment : $("#userComment").val().trim(),
+      by: $("#by").val().trim(),
+      article_id : articleId
+    };
+
+    $.ajax({
+      url : '/comment',
+      method : 'POST',
+      data : commentData
+    }).then((dbComment)=>{
+        getComments(articleId);
+    });
+    
+  })
 
 });  
